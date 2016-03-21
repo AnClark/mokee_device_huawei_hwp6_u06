@@ -64,6 +64,8 @@ BOARD_WPAN_DEVICE := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/huawei/hwp6_u06/bluetooth
 
 TARGET_PREBUILT_KERNEL := device/huawei/hwp6_u06/kernel
+TARGET_KERNEL_SOURCE := kernel/huawei/hwp6_u06
+TARGET_KERNEL_CONFIG := hisi_k3v2oem1_defconfig
 
 # adb has root
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
