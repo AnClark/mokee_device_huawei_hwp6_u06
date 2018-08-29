@@ -1,3 +1,5 @@
+type system;
+
 allow mediaserver device:dir { read open };
 allow mediaserver proc:file write;
 allow mediaserver system:unix_stream_socket { read write setopt };

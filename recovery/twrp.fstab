@@ -8,4 +8,5 @@
 /recovery	emmc		/dev/block/platform/hi_mci.1/by-name/recovery
 /cust		ext4		/dev/block/platform/hi_mci.1/by-name/cust	flags=display="Custom Storage";wipeingui;backup=1
 /external_sd	vfat		/dev/block/platform/hi_mci.0/mmcblk1p1	/dev/block/mmcblk1  flags=display="External Storage";storage;wipeingui;removable
+/otg		vfat		/dev/block/sda1	/dev/block/sda	flags=display="USB-OTG";storage;removable
 

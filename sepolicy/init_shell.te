@@ -1,4 +1,7 @@
 # wifi calibrator
+
+type init_shell;
+
 allow init_shell kernel:system module_request;
 allow init_shell labeledfs:filesystem remount;
 allow init_shell radio_data_file:file { read getattr open };

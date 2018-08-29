@@ -18,7 +18,8 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := healthd_board_k3v2oem1.cpp
-LOCAL_C_INCLUDES := system/core/healthd
+LOCAL_C_INCLUDES := system/core/healthd/include
+LOCAL_C_INCLUDES += system/core/base/include
 
 LOCAL_STATIC_LIBRARIES := libutils
 

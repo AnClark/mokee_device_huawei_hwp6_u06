@@ -1,9 +1,4 @@
-# The gps config appropriate for this device
-#$(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 $(call inherit-product-if-exists, vendor/huawei/hwp6_u06/hwp6_u06-vendor.mk)
 
@@ -11,14 +6,14 @@ LOCAL_PATH := device/huawei/hwp6_u06
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := $(LOCAL_PATH)/kernel
-else
-	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
+#ifeq ($(TARGET_PREBUILT_KERNEL),)
+#	LOCAL_KERNEL := $(LOCAL_PATH)/kernel
+#else
+#	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+#endif
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_KERNEL):kernel
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/fstab.k3v2oem1:root/fstab.k3v2oem1 \
@@ -41,7 +36,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/ueventd.k3v2oem1.rc:recovery/root/ueventd.k3v2oem1.rc \
-    $(LOCAL_PATH)/recovery/ueventd.rc:recovery/root/ueventd.rc \
     $(LOCAL_PATH)/recovery/fstab.k3v2oem1:recovery/root/fstab.k3v2oem1 \
     $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
@@ -554,7 +548,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true \
     af.resampler.quality=4    
 
-$(call inherit-product, build/target/product/full.mk)
+#$(call inherit-product, build/target/product/full.mk)
 
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)

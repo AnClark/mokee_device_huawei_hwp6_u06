@@ -1,3 +1,11 @@
+# The gps config appropriate for this device
+#$(call inherit-product, device/common/gps/gps_us_supl.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/omni/config/common.mk)
 
@@ -27,5 +35,9 @@ PRODUCT_MODEL := P6-U06
 PRODUCT_MANUFACTURER := HUAWEI
 
 PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=P6-U06 BUILD_FINGERPRINT="Huawei/P6-U06/hwp6-u06:4.4.2/HuaweiP6-U06/C17B506:user/ota-rel-keys,release-keys" PRIVATE_BUILD_DESC="P6-U06-user 4.4.2 HuaweiP6-U06 C17B506 ota-rel-keys,release-keys"
+
+
+
+ALLOW_MISSING_DEPENDENCIES := true
 
 

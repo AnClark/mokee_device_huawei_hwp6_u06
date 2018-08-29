@@ -63,14 +63,11 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_WPAN_DEVICE := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/huawei/hwp6_u06/bluetooth
 
-TARGET_PREBUILT_KERNEL := device/huawei/hwp6_u06/kernel
-TARGET_KERNEL_SOURCE := kernel/huawei/hwp6_u06
-TARGET_KERNEL_CONFIG := hisi_k3v2oem1_defconfig
-
 # adb has root
-ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
-ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
-ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mass_storage
+# It is not allowed in Android Oreo.
+#ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
+#ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
+#ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mass_storage
 
 # Graphics
 BOARD_EGL_CFG := device/huawei/hwp6_u06/prebuilt/lib/egl/egl.cfg
@@ -83,10 +80,22 @@ BOARD_SCREENRECORD_DEVICE_FORCE_AUDIO_MIC := true
 TARGET_GRALLOC_USES_ASHMEM := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := vmalloc=384M k3v2_pmem=1 mmcparts=mmcblk0:p1(xloader),p3(nvme),p4(misc),p5(splash),p6(oeminfo),p7(reserved1),p8(reserved2),p9(splash2),p10(recovery2),p11(recovery),p12(boot),p13(modemimage),p14(modemnvm1),p15(modemnvm2),p16(system),p17(cache),p18(cust),p19(userdata);mmcblk1:p1(ext_sdcard)
+# AnClark modified: Changed CMDLINE's vmalloc to 512M
+# NOTICE: mkbootimg version > Android 4.3 cannot generate valid bootimgs for Huawei P6.
+# 	  so we must use the older build instead.
+#TARGET_PREBUILT_KERNEL := device/huawei/hwp6_u06/kernel
+TARGET_KERNEL_SOURCE := kernel/huawei/hwp6_u06
+TARGET_KERNEL_CONFIG := cm_k3v2oem1_defconfig
+#BOARD_CUSTOM_MKBOOTIMG := device/huawei/hwp6_u06/toolchain/mkbootimg-4.3
+#BOARD_CUSTOM_BOOTIMG_MK := device/huawei/hwp6_u06/mkbootimg_hwp6.mk
+BOARD_KERNEL_CMDLINE := vmalloc=512M k3v2_pmem=1 mmcparts=mmcblk0:p1(xloader),p3(nvme),p4(misc),p5(splash),p6(oeminfo),p7(reserved1),p8(reserved2),p9(splash2),p10(recovery2),p11(recovery),p12(boot),p13(modemimage),p14(modemnvm1),p15(modemnvm2),p16(system),p17(cache),p18(cust),p19(userdata);mmcblk1:p1(ext_sdcard)
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset 0x01400000
+BOARD_KERNEL_IMAGE_NAME := zImage
+# Use custom kernel building toolchain instead of Omni-provided one
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-none-linux-gnueabi-
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/device/huawei/hwp6_u06/toolchain/FriendlyARM/toolschain/4.4.3/bin
 
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
@@ -111,12 +120,12 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/huawei/hwp6_u06/recovery/recovery_keys.c
 TARGET_RECOVERY_FSTAB := device/huawei/hwp6_u06/recovery/recovery.fstab
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 
 BOARD_RECOVERY_SWIPE := true
 
-TARGET_PREBUILT_RECOVERY_KERNEL := device/huawei/hwp6_u06/recovery-kernel
-TARGET_RECOVERY_INITRC := device/huawei/hwp6_u06/recovery/init.rc
+#TARGET_PREBUILT_RECOVERY_KERNEL := device/huawei/hwp6_u06/kernel
+# AnClark NOTE: Notice that Android 6.0 or above force applying selinux, so we must rewrite init.rc!
+#TARGET_RECOVERY_INITRC := device/huawei/hwp6_u06/recovery/init.rc
 
 #TWRP
 
@@ -155,3 +164,13 @@ BOARD_SEPOLICY_UNION += \
     system.te \
     vold.te \
     zygote.te
+
+# Enable logcat support! Yahoo!
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
+
+# SELinux
+ 
+# P6's kernel is too old, so we must lower the policy version
+# POLICYVERS := 26
+

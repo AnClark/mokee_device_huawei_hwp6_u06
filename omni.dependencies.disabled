@@ -1,0 +1,9 @@
+[
+  {
+     "remote": "omnirom",
+     "repository": "android_external_bluetooth_bluedroid",
+     "target_path": "external/bluetooth/bluedroid",
+     "revision": "android-5.1"
+  }
+]
+
