@@ -3,14 +3,6 @@ on init
     mkdir /sdcard
     mkdir /otg
 
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18D1
-    write /sys/class/android_usb/android0/idProduct D001
-    write /sys/class/android_usb/android0/functions mass_storage,adb
-    write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
-    write /sys/class/android_usb/android0/iProduct ${ro.product.model}
-    write /sys/class/android_usb/android0/iSerial ${ro.serialno}
-
     write /sys/module/block2mtd/parameters/block2mtd /dev/block/mmcblk0p3
     mount tmpfs tmpfs /tmp
     # change nve device visit permission
@@ -25,12 +17,18 @@ on init
 
 on fs
 
-    /dev/ttyUSB1   0777   root  root
-    /dev/ttyUSB0   0777   root  root
-    /dev/ttyACM0   0777   root  root
-    /dev/ttyACM1   0777   root  root
-    /dev/ttyACM2   0777   root  root
-    /dev/ttyACM3   0777   root  root
+    chmod 0777 /dev/ttyUSB1
+    chown root root /dev/ttyUSB1
+    chmod 0777 /dev/ttyUSB0
+    chown root root /dev/ttyUSB0
+    chmod 0777 /dev/ttyACM0
+    chown root root /dev/ttyACM0
+    chmod 0777 /dev/ttyACM1
+    chown root root /dev/ttyACM1
+    chmod 0777 /dev/ttyACM2
+    chown root root /dev/ttyACM2
+    chmod 0777 /dev/ttyACM3
+    chown root root /dev/ttyACM3
 
     write /sys/devices/system/cpu/cpufreq/k3hotplug/cpu_lock 2
     chown system system /sys/bus/i2c/devices/1-006b/enable_charger
