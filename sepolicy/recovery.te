@@ -1,0 +1,7 @@
+#allow recovery default_prop:property_service { set };
+#allow recovery system_radio_prop:property_service { set };
+allow recovery recovery:netlink_kobject_uevent_socket { read };
+allow recovery mtp_device:chr_file { open read write ioctl };
+allow recovery devpts:chr_file { read write open ioctl };
+#allow recovery system_data_file:file { getattr setattr write relabelfrom relabelto };
+

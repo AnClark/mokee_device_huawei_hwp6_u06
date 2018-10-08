@@ -1,0 +1,14 @@
+allow init kernel:security {
+	compute_av
+	compute_create
+	compute_member
+	check_context
+	compute_relabel
+	compute_user
+	setsecparam
+	read_policy
+	validate_trans 
+};
+allow init device:chr_file getattr;
+#allow init rootfs:file { create write };
+

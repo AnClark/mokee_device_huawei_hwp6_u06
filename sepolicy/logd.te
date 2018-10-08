@@ -1,0 +1,2 @@
+allow logd rootfs:file { entrypoint read getattr open };
+

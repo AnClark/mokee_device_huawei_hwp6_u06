@@ -1,2 +1,3 @@
 # zygote talks to init
-unix_socket_connect(zygote, property, init);
+#unix_socket_connect(zygote, property, init);
+set_prop(zygote, init)
