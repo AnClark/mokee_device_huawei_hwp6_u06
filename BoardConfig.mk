@@ -83,7 +83,6 @@ TARGET_GRALLOC_USES_ASHMEM := true
 # AnClark modified: Changed CMDLINE's vmalloc to 512M
 # NOTICE: mkbootimg version > Android 4.3 cannot generate valid bootimgs for Huawei P6.
 # 	  so we must use the older build instead. Android >= 8.0's mkbootimg has no problem.
-#TARGET_PREBUILT_KERNEL := device/huawei/hwp6_u06/kernel
 TARGET_KERNEL_SOURCE := kernel/huawei/hwp6_u06
 TARGET_KERNEL_CONFIG := cm_k3v2oem1_defconfig
 #BOARD_CUSTOM_MKBOOTIMG := device/huawei/hwp6_u06/toolchain/mkbootimg-4.3
@@ -96,7 +95,7 @@ BOARD_KERNEL_IMAGE_NAME := zImage
 # Use custom kernel building toolchain instead of Omni-provided one,
 # or the kernel won't boot
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-none-linux-gnueabi-
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/device/huawei/hwp6_u06/toolchain/FriendlyARM/toolschain/4.4.3/bin
+KERNEL_TOOLCHAIN := $(TARGET_DEVICE_DIR)/toolchain/FriendlyARM/toolschain/4.4.3/bin
 
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
@@ -124,12 +123,10 @@ TARGET_RECOVERY_FSTAB := device/huawei/hwp6_u06/recovery/recovery.fstab
 
 BOARD_RECOVERY_SWIPE := true
 
-#TARGET_PREBUILT_RECOVERY_KERNEL := device/huawei/hwp6_u06/kernel
 # AnClark NOTE: Notice that Android 6.0 or above force applying selinux, so we must rewrite init.rc!
 #TARGET_RECOVERY_INITRC := device/huawei/hwp6_u06/recovery/init.rc
 
-#TWRP
-
+# TWRP
 HAVE_SELINUX := true
 
 TW_MAX_BRIGHTNESS := 255
