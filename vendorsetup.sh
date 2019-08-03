@@ -1,3 +1,3 @@
 
-add_lunch_combo omni_hwp6_u06-userdebug
-add_lunch_combo omni_hwp6_u06-eng
+add_lunch_combo mk_hwp6_u06-userdebug
+add_lunch_combo mk_hwp6_u06-eng

@@ -473,8 +473,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/wifi/p2p_supplicant.conf:/system/etc/wifi/p2p_supplicant.conf
 
 PRODUCT_PACKAGES += \
+    lib_driver_cmd_wl12xx \
     wpa_supplicant.conf \
     hostapd.conf
+
 
 # Misc
 PRODUCT_PACKAGES += \
@@ -482,17 +484,13 @@ PRODUCT_PACKAGES += \
     librs_jni \
     libsrec_jni \
     com.android.future.usb.accessory \
-    make_ext4fs 
+    make_ext4fs
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
     LiveWallpapers \
     LiveWallpapersPicker \
     VisualizationWallpapers
-
-#Torch
-PRODUCT_PACKAGES += \
-    OmniTorch
 
 # Bluetooth
 PRODUCT_PACKAGES += \
